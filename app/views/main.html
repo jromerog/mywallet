@@ -1,11 +1,11 @@
 <div class="container">
-  <form role="amountForm" name="wallet" novalidate>
+  <form role="amountForm" name="wallet" ng-submit="myWallet.addAmount()" novalidate>
     <div class="form-group">
       <label for="amount">Amount</label>
-      <input type="amount" class="form-control" id="amount" placeholder="Place yout amount" required>
+      <input type="amount" class="form-control" id="amount" ng-model="myWallet.newAmount.amount" placeholder="Place yout amount" required>
     </div>
     <button type="submit" name="addAmount" class="btn btn-success">Add amount</button>
-    <button type="submit" name="removeAmount" class="btn btn btn-danger">Remove Amount</button>
+    <button type="submit" name="removeAmount" class="btn btn btn-danger" >Remove Amount</button>
 
     <table class="table">
       <thead>
@@ -16,8 +16,8 @@
       </thead>
       <tbody>
         <tr ng-repeat="amount in myWallet.amounts">
-          <td>{{amount.date}}</td>
-          <td>{{amount.amount}}</td>
+          <td>{{amount.date | date:"MM/dd/yyyy"}}</td>
+          <td>{{amount.amount | currency}}</td>
         </tr>
       </tbody>
       <tfoot>
