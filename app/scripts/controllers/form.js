@@ -41,8 +41,6 @@ angular.module('mywalletApp').controller('FormCtrl',function ($scope, localStora
 		}
 	};
 
-	
-
 	$scope.totalAmount = function(){
 		var total = 0 ;
 		angular.forEach($scope.amounts, function(item) {
@@ -66,6 +64,8 @@ angular.module('mywalletApp').controller('FormCtrl',function ($scope, localStora
 		}
 	};
 
-
+	$scope.Reset = function () {
+      	$scope.amounts = [];
+    };
 
 });
