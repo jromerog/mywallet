@@ -1,31 +1,43 @@
 <div class="container">
-  <form role="amountForm" name="wallet" ng-submit="myWallet.addAmount()" novalidate>
+  <form role="form" name="wallet" ng-controller="MainCtrl as myWallet" novalidate>
+
+    <div class="alert alert-danger" role="alert" ng-show="!wallet.$valid && !wallet.$pristine"> You can use just numbers </div>
+    <div class="alert alert-danger" role="alert" ng-show="notFunds">
+      Sorry, you don't have enough money for that withdrawal!
+    </div>
+
     <div class="form-group">
       <label for="amount">Amount</label>
-      <input type="amount" class="form-control" id="amount" ng-model="myWallet.newAmount.amount" placeholder="Place yout amount" required>
+      <input type="number" class="form-control" id="amount" ng-model="newAmounts.amount" placeholder="Place yout amount" required>
     </div>
-    <button type="submit" name="addAmount" class="btn btn-success">Add amount</button>
-    <button type="submit" name="removeAmount" class="btn btn btn-danger" >Remove Amount</button>
+
+    <button type="submit" name="addAmount" class="btn btn-success" ng-click="wallet.$valid && addAmount('entry')">Add amount</button>
+    <button type="submit" name="removeAmount" class="btn btn btn-danger" ng-click="wallet.$valid && addAmount('withdrawal')">Remove Amount</button>
+
+    <div class="alert alert-danger" role="alert" ng-show="">hola</div>
 
     <table class="table">
       <thead>
         <tr>
           <th>Date</th>
+          <th>Transaction</th>
           <th>Amount</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="amount in myWallet.amounts">
+        <tr ng-repeat="amount in amounts">
           <td>{{amount.date | date:"MM/dd/yyyy"}}</td>
+          <td>{{amount.transaction | uppercase }}</td>
           <td>{{amount.amount | currency}}</td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
-          <th>Total amount</th>
-          <td>+2500</td>
+          <th colspan="2">Total amount</th>
+          <td><span class="fa fa-usd"> {{totalAmount()}}</span></td>
         </tr>
       </tfoot>
     </table>
   </form>
+
 </div>
