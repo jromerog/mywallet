@@ -22,7 +22,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
+    <div class="container" ng-controller="MainCtrl">
       <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -36,7 +36,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a ng-href="#">Home</a></li>
-            <li><a ng-href="#">Reset</a></li>
+            <li><a ng-href="#" ng-click="Reset()">Reset</a></li>
             <li><a ng-href="#">View</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -70,6 +70,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/form.js"></script>
         <!-- endbuild -->
 </body>
 </html>

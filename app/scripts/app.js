@@ -8,6 +8,9 @@
  *
  * Main module of the application.
  */
- angular.module('mywalletApp', ['LocalStorageModule']).config(['localStorageServiceProvider', function(localStorageServiceProvider){
+ var app = angular.module('mywalletApp', ['LocalStorageModule']);
+
+ /* localStorageServiceProvider to use "ls" as a localStorage name prefix */
+ app.config(['localStorageServiceProvider', function(localStorageServiceProvider){
   localStorageServiceProvider.setPrefix('ls');
 }]);
