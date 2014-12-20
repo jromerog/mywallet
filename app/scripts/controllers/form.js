@@ -11,10 +11,7 @@ angular.module('mywalletApp').controller('FormCtrl',['$scope', 'myStorage', func
 
 	$scope.amounts = myStorage.getStorage() || [];
 	$scope.newAmounts = {};
-
-	$scope.$watch('myStorage.resetStorage()', function () {
-		
-    }, true);
+	$scope.notFunds;
 
 	//Add amount method
 	$scope.addAmount = function (action){
@@ -29,7 +26,6 @@ angular.module('mywalletApp').controller('FormCtrl',['$scope', 'myStorage', func
 		        areFunds = $scope.checkFunds($scope.newAmounts.amount);
 		        break;
 		}
-
 		//we have funds to make the transaction
 		if(!areFunds){
 			$scope.newAmounts.date = Date.now();
