@@ -2,22 +2,21 @@
 
 /**
  * @ngdoc function
- * @name mywalletApp.controller:MainCtrl
+ * @name mywalletApp.controller:FormCtrl
  * @description
- * # MainCtrl
+ * # FormCtrl
  * Controller of the mywalletApp
  */
-angular.module('mywalletApp').controller('FormCtrl',function ($scope, localStorageService ) {
+angular.module('mywalletApp').controller('FormCtrl',['$scope', 'myStorage', function ($scope,myStorage) {
 
-	var amountsStore = localStorageService.get('amounts');
-
-	$scope.amounts = amountsStore || [];
+	$scope.amounts = myStorage.getStorage() || [];
 	$scope.newAmounts = {};
 
-	$scope.$watch('amounts', function () {
-      localStorageService.set('amounts', $scope.amounts);
+	$scope.$watch('myStorage.resetStorage()', function () {
+		
     }, true);
 
+	//Add amount method
 	$scope.addAmount = function (action){
 		var areFunds;
 		switch(action) {
@@ -26,13 +25,16 @@ angular.module('mywalletApp').controller('FormCtrl',function ($scope, localStora
 		        break;
 		    case 'withdrawal':
 		        $scope.newAmounts.transaction = 'withdrawal';
+		        //Check if we have money enough
 		        areFunds = $scope.checkFunds($scope.newAmounts.amount);
 		        break;
 		}
 
+		//we have funds to make the transaction
 		if(!areFunds){
 			$scope.newAmounts.date = Date.now();
 			$scope.amounts.push($scope.newAmounts);
+			myStorage.setStorage($scope.amounts);
 			$scope.newAmounts = {};
 			$scope.wallet.$setPristine();
 			$scope.notFunds = false;
@@ -41,6 +43,7 @@ angular.module('mywalletApp').controller('FormCtrl',function ($scope, localStora
 		}
 	};
 
+	//Get total amount method
 	$scope.totalAmount = function(){
 		var total = 0 ;
 		angular.forEach($scope.amounts, function(item) {
@@ -56,6 +59,7 @@ angular.module('mywalletApp').controller('FormCtrl',function ($scope, localStora
 		return total;
 	};
 
+	//Check if there enough money to make a withdrawal
 	$scope.checkFunds = function(amount){
 		if(amount > $scope.totalAmount()){ 
 			return true; 
@@ -64,8 +68,4 @@ angular.module('mywalletApp').controller('FormCtrl',function ($scope, localStora
 		}
 	};
 
-	$scope.Reset = function () {
-      	$scope.amounts = [];
-    };
-
-});
+}]);
