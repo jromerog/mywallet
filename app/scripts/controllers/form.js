@@ -8,10 +8,13 @@
  * Controller of the mywalletApp
  */
 angular.module('mywalletApp').controller('FormCtrl',['$scope', 'myStorage', function ($scope,myStorage) {
+	
+	// key of localstore
+	var store = 'amounts';
 
-	$scope.amounts = myStorage.getStorage() || [];
+	// myStorage.amounts = myStorage.getStorage(store) || [];
+	$scope.amounts = function(){ return myStorage[store]; } || [];
 	$scope.newAmounts = {};
-	$scope.notFunds;
 
 	//Add amount method
 	$scope.addAmount = function (action){
@@ -29,8 +32,9 @@ angular.module('mywalletApp').controller('FormCtrl',['$scope', 'myStorage', func
 		//we have funds to make the transaction
 		if(!areFunds){
 			$scope.newAmounts.date = Date.now();
-			$scope.amounts.push($scope.newAmounts);
-			myStorage.setStorage($scope.amounts);
+			myStorage.amounts.push($scope.newAmounts);
+			// set data in localstore
+			myStorage.setStorage(store, myStorage.amounts);
 			$scope.newAmounts = {};
 			$scope.wallet.$setPristine();
 			$scope.notFunds = false;
@@ -42,7 +46,7 @@ angular.module('mywalletApp').controller('FormCtrl',['$scope', 'myStorage', func
 	//Get total amount method
 	$scope.totalAmount = function(){
 		var total = 0 ;
-		angular.forEach($scope.amounts, function(item) {
+		angular.forEach(myStorage.amounts, function(item) {
 			switch(item.transaction) {
 			    case 'entry':
 			        total += item.amount;
@@ -62,6 +66,10 @@ angular.module('mywalletApp').controller('FormCtrl',['$scope', 'myStorage', func
 		} else { 
 			return false;
 		}
+	};
+	
+	$scope.Reset = function(){
+		myStorage.resetStorage(store);
 	};
 
 }]);

@@ -7,8 +7,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="amount in amounts">
-      <td>{{amount.date | date:"MM/dd/yyyy"}}</td>
+    <tr ng-repeat="amount in amounts() | orderBy : '-date'">
+      <td>{{amount.date | date:"MM/dd/yyyy - HH:mm"}}</td>
       <td>{{amount.transaction | uppercase }}</td>
       <td>{{amount.amount | currency : "£"}}</td>
     </tr>
