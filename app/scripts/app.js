@@ -11,22 +11,25 @@
  var app = angular.module('mywalletApp', ['LocalStorageModule']);
 
  /* localStorageServiceProvider to use "ls" as a localStorage name prefix */
- app.config(['localStorageServiceProvider', function(localStorageServiceProvider){
+app.config(['localStorageServiceProvider', function(localStorageServiceProvider){
   localStorageServiceProvider.setPrefix('ls');
 }]);
 
-/* storage available to APP */
+/* Storage available to APP */
 app.factory('myStorage', ['localStorageService', function(localStorageService){
-	var amountsStore = localStorageService.get('amounts');
 	return {
-		getStorage:function(){
-			return amountsStore;
+		createLocalStorage:function($key){
+			this[$key] = [];
 		},
-		setStorage:function($val){
-			localStorageService.set('amounts', $val);
+		loadStorage:function($key){
+			this[$key] = localStorageService.get($key);
 		},
-		resetStorage:function(){
-			this.setStorage([]);
+		setStorage:function($key, $val){
+			localStorageService.set($key, $val);
 		},
+		resetStorage:function($key){
+			this[$key] = [];
+			this.setStorage($key,this[$key]);
+		}
 	};
 }]);
