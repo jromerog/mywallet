@@ -6,13 +6,16 @@ describe('Controller: FormCtrl', function () {
   beforeEach(module('mywalletApp'));
 
   var FormCtrl,
-    scope;
+      scope,
+      myStorage;
 
   //Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, $injector) {
     scope = $rootScope.$new();
+    myStorage = $injector.get('myStorage');
     FormCtrl = $controller('FormCtrl', {
-      $scope: scope
+      $scope: scope,
+      myStorage: myStorage
     });
   }));
 
@@ -21,17 +24,18 @@ describe('Controller: FormCtrl', function () {
   });
 
   it('should add items to the table', function () {
+    myStorage.createLocalStorage('amounts');
     scope.wallet = {
       $valid: true,
       $setPristine: function() {}
     };
     scope.newAmounts.amount = 100;
     scope.addAmount('entry');
-    expect(scope.amounts.length).toBe(1);
+    expect(myStorage.amounts.length).toBe(1);
   });
 
   it('check funds before withdrawal', function () {
-    scope.amounts = [{"amount":2000,"transaction":"entry","date":1419098166543},{"amount":1000,"transaction":"entry","date":1419098787506}];
+    scope.amounts = [{'amount':2000,'transaction':'entry','date':1419098166543},{'amount':1000,'transaction':'entry','date':1419098787506}];
     scope.wallet = {
       $valid: true,
       $setPristine: function() {}
