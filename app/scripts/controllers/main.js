@@ -12,7 +12,6 @@ angular.module('mywalletApp').controller('MainCtrl',['$scope','myStorage', funct
 	
 	//Load data from amounts
 	var store = 'amounts';
-	myStorage.createLocalStorage(store);
 	myStorage.loadStorage(store);
 
 	$scope.Reset = function(){

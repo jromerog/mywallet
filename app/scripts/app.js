@@ -18,11 +18,8 @@ app.config(['localStorageServiceProvider', function(localStorageServiceProvider)
 /* Storage available to APP */
 app.factory('myStorage', ['localStorageService', function(localStorageService){
 	return {
-		createLocalStorage:function($key){
-			this[$key] = [];
-		},
 		loadStorage:function($key){
-			this[$key] = localStorageService.get($key);
+			this[$key] = localStorageService.get($key) || [];
 		},
 		setStorage:function($key, $val){
 			localStorageService.set($key, $val);

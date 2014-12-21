@@ -24,7 +24,7 @@ describe('Controller: FormCtrl', function () {
   });
 
   it('should add items to the table', function () {
-    myStorage.createLocalStorage('amounts');
+    myStorage.loadStorage('amounts');
     scope.wallet = {
       $valid: true,
       $setPristine: function() {}
