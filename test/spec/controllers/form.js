@@ -24,6 +24,7 @@ describe('Controller: FormCtrl', function () {
   });
 
   it('should add items to the table', function () {
+    myStorage.resetStorage('amounts'); //empty storage
     myStorage.loadStorage('amounts');
     scope.wallet = {
       $valid: true,
