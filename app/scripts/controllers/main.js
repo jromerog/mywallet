@@ -8,20 +8,20 @@
  * Controller of the mywalletApp
  */
 
-angular.module('mywalletApp').controller('MainCtrl',['$scope','myStorage', function ($scope,myStorage) {
+angular.module('mywalletApp').controller('MainCtrl',['$scope','$log','myStorage', function ($scope, $log ,myStorage) {
 	
 	//Load data from amounts
 	var store = 'amounts';
 	myStorage.loadStorage(store);
 
-	$scope.section = 1;
+	var tabs = {};	
 
-	$scope.selectTab = function(tab){
-		$scope.section = tab;
-	}
+	$scope.selectTab = function(s, tab){
+		tabs[s] = tab;
+	};
 
-	$scope.selectedTab = function(tab){
-		return tab === $scope.section;
+	$scope.selectedTab = function(s, tab){
+		return tab === tabs[s];
 	};
 
 	$scope.Reset = function(){

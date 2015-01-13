@@ -34,10 +34,11 @@
           </button>
           <a class="navbar-brand" href="#">My Wallet</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse" ng-init = "selectTab('section',1)">
           <ul class="nav navbar-nav">
-            <li ng-class="{ active : selectedTab(1) }"> <a href="/" ng-click="selectTab(1)">Home</a> </li>
-            <li ng-class="{ active : selectedTab(2) }"><a href="wallet/" ng-click="selectTab(2)">Wallet</a></li>
+            <li ng-class="{ active : selectedTab('section',1) }"> <a href="/" ng-click="selectTab('section',1)">Home</a> </li>
+            <li ng-class="{ active : selectedTab('section',2) }"><a href="wallets/" ng-click="selectTab('section',2)">Wallets</a></li>
+            <li ng-class="{ active : selectedTab('section',3) }"><a href="wallet/" ng-click="selectTab('section',3)">Wallet</a></li>
             <li><a href="#" ng-click="Reset()">Reset</a></li>
             <li><a href="http://github.com/jromerog/mywallet" target="_blank">View source</a></li>
           </ul>
@@ -78,8 +79,10 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/directives.js"></script>
+        <script src="scripts/controllers/main.js"></script> 
+        <script src="scripts/controllers/wallets.js"></script>
         <script src="scripts/controllers/form.js"></script>
-        <script src="scripts/controllers/main.js"></script>
+       
         <!-- endbuild -->
 </body>
 </html>

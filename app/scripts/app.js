@@ -21,6 +21,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 	.when('/', {
 	    templateUrl: 'views/main.html'
 	})
+	.when('/wallets/', {
+		templateUrl: 'views/wallets.html',
+		controller: 'WalletsCtrl'
+	})
 	.when('/wallet/', {
 		templateUrl: 'views/form.html',
 		controller: 'FormCtrl'

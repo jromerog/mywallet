@@ -1,0 +1,23 @@
+
+<ul class="nav nav-tabs" ng-init = "selectTab('wallet',1)">
+	<li ng-class="{ active : selectedTab('wallet',1) }"> 
+		<a href="#" ng-click="selectTab('wallet',1)">Create</a>
+	</li>
+	<li ng-class="{ active : selectedTab('wallet',2) }">
+		<a href="#" ng-click="selectTab('wallet',2)">Search</a>
+	</li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div role="tabpanel" id="create" name="create" ng-show="selectedTab('wallet',1)">
+  	<form name="search_wallet" ng-submit="createWallet()">
+	    <div class="form-group">
+		    <label for="amount">Create wallet</label>
+		    <input type="text" class="form-control" id="createWallet" ng-model="walletName" placeholder="Name of wallet">
+		</div>
+		<input type="submit" name="createWalletSubmit" class="btn btn-success" value="Create" />
+	</form>
+  </div>
+  <div role="tabpanel" id="create" ng-show="selectedTab('wallet',2)">
+   asdf
+  </div>
+</div>
