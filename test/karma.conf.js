@@ -43,7 +43,7 @@ module.exports = function(config) {
     browsers: [
       'PhantomJS',
       'Chrome',
-      'Safari',
+      // 'Safari',
       'Firefox',
       'IE',
     ],
@@ -51,7 +51,7 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       'karma-chrome-launcher',
-      'karma-safari-launcher',
+      // 'karma-safari-launcher',
       'karma-firefox-launcher',
       'karma-ie-launcher',
       'karma-phantomjs-launcher',
