@@ -1,0 +1,18 @@
+<form role="form" name="wallet"  novalidate>
+
+  <div class="alert alert-danger" role="alert" ng-show="!wallet.$valid && !wallet.$pristine"> You can use just numbers </div>
+  <div class="alert alert-danger" role="alert" ng-show="notFunds">
+    Sorry, you don't have enough money for that withdrawal!
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <input type="number" class="form-control" id="amount" ng-model="newAmounts.amount" min="0" placeholder="Place yout amount" required>
+  </div>
+
+  <button type="submit" name="addAmount" class="btn btn-success" ng-click="wallet.$valid && addAmount('entry')">Add amount</button>
+  <button type="submit" name="removeAmount" class="btn btn btn-danger" ng-click="wallet.$valid && addAmount('withdrawal')">Remove Amount</button>
+
+  <!-- Table wallet -->
+  <amounts-table></amounts-table>
+</form>
