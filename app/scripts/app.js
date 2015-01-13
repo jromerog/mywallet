@@ -8,11 +8,26 @@
  *
  * Main module of the application.
  */
- var app = angular.module('mywalletApp', ['LocalStorageModule']);
+ var app = angular.module('mywalletApp', ['LocalStorageModule', 'ngRoute']);
 
  /* localStorageServiceProvider to use "ls" as a localStorage name prefix */
 app.config(['localStorageServiceProvider', function(localStorageServiceProvider){
   localStorageServiceProvider.setPrefix('ls');
+}]);
+
+/* $route service */
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+	$routeProvider
+	.when('/', {
+	    templateUrl: 'views/main.html'
+	})
+	.when('/wallet/', {
+		templateUrl: 'views/form.html',
+		controller: 'FormCtrl'
+	});
+	
+	//Hash
+	$locationProvider.html5Mode(true);
 }]);
 
 /* Storage available to APP */

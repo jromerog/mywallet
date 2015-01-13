@@ -12,6 +12,6 @@ var app = angular.module('mywalletApp');
 app.directive('amountsTable',function(){
 	return{
 		restric:'E',
-		templateUrl:'views/amounts-table.html'
+		templateUrl:'views/components/amounts-table.html'
 	};
 });

@@ -15,6 +15,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <base href="/">
   </head>
   <body ng-app="mywalletApp">
     <!--[if lt IE 7]>
@@ -35,14 +36,20 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a ng-href="#">Home</a></li>
-            <li><a ng-href="#" ng-click="Reset()">Reset</a></li>
+            <li ng-class="{ active : selectedTab(1) }"> <a href="/" ng-click="selectTab(1)">Home</a> </li>
+            <li ng-class="{ active : selectedTab(2) }"><a href="wallet/" ng-click="selectTab(2)">Wallet</a></li>
+            <li><a href="#" ng-click="Reset()">Reset</a></li>
             <li><a href="http://github.com/jromerog/mywallet" target="_blank">View source</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </nav>
 
-      <div ng-include="'views/main.html'"></div>
+      <!-- <div ng-include="'views/main.html'"></div> -->
+      <div ng-view="">
+        <div class="container">
+
+        </div>
+      </div>
 
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> Front-end Developer Test</p>
@@ -63,6 +70,7 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
